@@ -11,13 +11,14 @@ export default class Dashboard extends React.Component{
             rolls: 2,
             visits:5,
             sheetsPerVisit:10,
-            sheetsPerRoll:1000
+            sheetsPerRoll:1000,
+            headCount:1
         };
     }
     calculate(){
         const numSheets = Number(this.state.rolls)*Number(this.state.sheetsPerRoll);
-        const numSheetsUsedPerDay = Number(this.state.visits)*Number(this.state.sheetsPerVisit);
-        return numSheets/numSheetsUsedPerDay;
+        const numSheetsUsedPerDay = Number(this.state.visits)*Number(this.state.sheetsPerVisit)*Number(this.state.headCount);
+        return Math.round(numSheets/numSheetsUsedPerDay);
     }
 
     render(){
@@ -33,6 +34,7 @@ export default class Dashboard extends React.Component{
                     <Input id='sheetsPerRoll' type='number' min={1} max={5000} value={this.state.sheetsPerRoll} text = 'Number of sheets per roll' onChange={(e)=>{this.setState({sheetsPerRoll:e.target.value})}} />
                     <Input id='visits' type='number' min={1} max={50} value={this.state.visits} text = 'Toilet Visits Per Day' onChange={(e)=>{this.setState({visits:e.target.value})}} />
                     <Input  id='sheetsPerVisit' type='number' min={1} max={50} value={this.state.sheetsPerVisit} text = 'Number of sheets used per visit' onChange={(e)=>{this.setState({sheetsPerVisit: e.target.value})}}/>
+                    <Input  id='headCount' type='number' min={1} max={20} value={this.state.headCount} text = 'Number of person in Family' onChange={(e)=>{this.setState({headCount: e.target.value})}}/>
                     </form>
             </div>
         );
